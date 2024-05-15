@@ -31,7 +31,7 @@ function App() {
         {filmy.map(film => (
           
           <Grid item xs={4} key={film.id}>
-            <Paper onClick={() => vyberFilm(film.title + (window.alert("Žánr toho to filmu je:" +" " + film.genre)))} style={{textAlign:"center"}}
+            <Paper onClick={() => vyberFilm((film.title)) + (window.alert("Žánr toho to filmu je:" +" " + film.genre))} style={{textAlign:"center"}}
             >
             
           <Typography variant='caption'>
