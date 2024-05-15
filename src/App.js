@@ -1,38 +1,44 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Paper from '@mui/material/Paper'
-import { Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 
 
 
 function App() {
-  const [piva, nastavPiva] = useState([])
-  const [vybranaPiva, vyberPivo] = useState("")
-  useEffect(() => { axios.get().then(odpoved => { nastavPiva(odpoved.data) }) }, [])
+  const [filmy, nastavFilm] = useState([])
+  const [vybranyFilm, vyberFilm] = useState("")
+  useEffect(() => { axios.get("https://api.sampleapis.com/cartoons/cartoons2D").then(odpoved => { nastavFilm(odpoved.data) }) }, [])
   
   return (
 
     <>
-    <Typography variant='h2'>Pub menu</Typography><br></br>
+    <Typography variant='h2'>Filmy</Typography><br></br>
 
       
-        <Typography variant='body1'>{vybranaPiva != "" && <span>Vybraná kava je: {vybranaPiva}</span>}</Typography><br></br>
-      
+        <Typography variant='body1'>{vybranyFilm != "" && <span>Vybraný filmy: {vybranyFilm}</span>}</Typography><br></br>
       <Grid container spacing={4}>
-        {piva.map(pivo => (
+        {filmy.map(film => (
           
-          <Grid item xs={6} key={pivo.id}>
-            <Paper onClick={() => vyberPivo(pivo.title)} style={{textAlign:"center"}}>
+          <Grid item xs={4} key={film.id}>
+            <Paper onClick={() => vyberFilm(film.title + (window.alert("Žánr toho to filmu je:" +" " + film.genre)))} style={{textAlign:"center"}}
+            >
+            
           <Typography variant='caption'>
-              <img src={pivo.image} style={{ width: "250px",  }}></img><br></br>
-              {pivo.title}
+              <img src={film.image} style={{ width: "250px",  }}></img><br></br>
+              {film.title}<br></br>
+              {film.creator}
+             
               </Typography>
             </Paper>
           </Grid>
 
+          //        <a href={"https://cs.wikipedia.org/w/index.php?search="+props.title+"&title=Speci%C3%A1ln%C3%AD%3AHled%C3%A1n%C3%AD&ns0=1&ns100=1&ns102=1"}
+
         ))
 
         } </Grid>
+        
     </>
   );
 
